@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Join Room "{{ room.name }}"{% endblock %}
+
+{% block body %}
+    {% if jwt is not null %}
+        <div class="container text-center  video-container" data-user-identifier="{{ app.user.userIdentifier }}"
+             data-jwt="{{ jwt }}" data-session-name="{{ room.publicId }}">
+            <div class="row">
+                <div class="col">
+                    <video id="self-view-video" width="960" height="540"></video>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <canvas id="participant-videos-canvas" width="720" height="270"></canvas>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://source.zoom.us/videosdk/zoom-video-1.9.8.min.js"></script>
+    {{ encore_entry_script_tags('zoom') }}
+{% endblock %}
